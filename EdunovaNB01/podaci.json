@@ -1,0 +1,52 @@
+[
+  {
+    "sifra": 1,
+    "naziv": "M1",
+    "cijena": 0
+  },
+  {
+    "sifra": 2,
+    "naziv": "M2",
+    "cijena": 1000
+  },
+  {
+    "sifra": 3,
+    "naziv": "M3",
+    "cijena": 2000
+  },
+  {
+    "sifra": 4,
+    "naziv": "M4",
+    "cijena": 3000
+  },
+  {
+    "sifra": 5,
+    "naziv": "M5",
+    "cijena": 4000
+  },
+  {
+    "sifra": 6,
+    "naziv": "M6",
+    "cijena": 5000
+  },
+  {
+    "sifra": 7,
+    "naziv": "M7",
+    "cijena": 6000
+  },
+  {
+    "sifra": 8,
+    "naziv": "M8",
+    "cijena": 7000
+  },
+  {
+    "sifra": 9,
+    "naziv": "M9",
+    "cijena": 8000
+  },
+  {
+    "sifra": 10,
+    "naziv": "M10",
+    "cijena": 9000
+  }
+]
