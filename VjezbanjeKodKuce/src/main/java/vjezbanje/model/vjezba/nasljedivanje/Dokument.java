@@ -2,27 +2,25 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package vjezbanje.model.vjezba;
+package vjezbanje.model.vjezba.nasljedivanje;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import java.util.Date;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 
 /**
  *
  * @author Igor
  */
-@Entity(name = "olovke")
-public class Olovka {
+@MappedSuperclass
+public class Dokument {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(columnDefinition = "varchar(50)", nullable = false)
-    private String proizvodac;
     
-    private boolean ispravan;
+    private Date datum;
 
     public Integer getId() {
         return id;
@@ -32,21 +30,14 @@ public class Olovka {
         this.id = id;
     }
 
-    public String getProizvodac() {
-        return proizvodac;
+    public Date getDatum() {
+        return datum;
     }
 
-    public void setProizvodac(String proizvodac) {
-        this.proizvodac = proizvodac;
+    public void setDatum(Date datum) {
+        this.datum = datum;
     }
-
-    public boolean isIspravan() {
-        return ispravan;
-    }
-
-    public void setIspravan(boolean ispravan) {
-        this.ispravan = ispravan;
-    }
+    
     
     
 }

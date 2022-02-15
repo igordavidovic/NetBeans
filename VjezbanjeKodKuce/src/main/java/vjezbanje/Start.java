@@ -7,7 +7,7 @@ package vjezbanje;
 import java.math.BigDecimal;
 import java.util.Date;
 import org.hibernate.Session;
-import vjezbanje.model.vjezba.Mobitel;
+import vjezbanje.model.vjezba.osnovno.Mobitel;
 import vjezbanje.util.HibernateUtil;
 
 /**
@@ -18,8 +18,9 @@ public class Start {
    
     
     public static void main(String[] args) {
-        Session s = HibernateUtil.getSession();         
-        Mobitel m = new Mobitel();
+       Session s = HibernateUtil.getSession();         
+       
+       /* Mobitel m = new Mobitel();
         m.setCijena(new BigDecimal(5999.99));
         m.setNaziv("iPhone");
         m.setDatumKupnje(new Date());
@@ -30,5 +31,7 @@ public class Start {
         s.beginTransaction();
         s.save(m);
         s.getTransaction().commit();
+            */
+        
     }
 }
