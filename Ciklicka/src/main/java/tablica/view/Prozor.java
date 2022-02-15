@@ -4,6 +4,9 @@
  */
 package tablica.view;
 
+import javax.swing.JOptionPane;
+import tablica.util.Provjera;
+
 /**
  *
  * @author Igor
@@ -34,6 +37,11 @@ public class Prozor extends javax.swing.JFrame {
         setTitle("NetBeans Aplikacija");
 
         btnStart.setText("START");
+        btnStart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStartActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -62,6 +70,17 @@ public class Prozor extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
+        int r = Provjera.provjeraRijedka(txtRijedakUnos.getText());
+        int s = Provjera.provjeraStupca(txtStupacUnos.getText());
+        boolean provjera = Provjera.pozitivnost(r, s);
+        if(provjera == true){
+            JOptionPane.showMessageDialog(rootPane, "Unos je točan");
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Unos nije točan");
+        }
+    }//GEN-LAST:event_btnStartActionPerformed
 
     /**
      * @param args the command line arguments

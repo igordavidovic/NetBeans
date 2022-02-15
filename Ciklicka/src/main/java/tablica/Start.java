@@ -4,6 +4,7 @@
  */
 package tablica;
 
+
 import tablica.view.Prozor;
 
 
@@ -13,6 +14,7 @@ import tablica.view.Prozor;
  * @author Igor
  */
 public class Start {
+    
     public static void main(String[] args) {
         new Prozor().setVisible(true);
     }
