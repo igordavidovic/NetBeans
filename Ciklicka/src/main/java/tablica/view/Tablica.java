@@ -13,6 +13,10 @@ public class Tablica extends javax.swing.JFrame {
     /**
      * Creates new form Tablica
      */
+    private int proizvod;
+    private int d = 1;
+    private int m = 0;
+
     public Tablica() {
         initComponents();
     }
@@ -58,13 +62,79 @@ public class Tablica extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    public void kreiranjeTablice(int r,int s){
-         jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [r][s],
-            new String [s]    
+    public void kreiranjeTablice(int r, int s) {
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+                new Object[r][s],
+                new String[s]
         ));
-         
+        proizvod = r * s;
+        punjenjeTablice(r, s);
     }
+
+    private void punjenjeTablice(int r, int s) {
+        while (true) {
+            if (d > proizvod) {
+                break;
+            }
+            ddDesnoLijevo(r, s);
+            if (d > proizvod) {
+                break;
+            }
+            dlLijevoGore(r, s);
+            if (d > proizvod) {
+                break;
+            }
+            glLijevoDesno(r, s);
+            if (d > proizvod) {
+                break;
+            }
+            gdDesnoDolje(r, s);
+            m++;
+        }
+    }
+
+    private void ddDesnoLijevo(int r, int s) {
+
+        for (int y = s - (1 + m); y >= m; y--) {
+            if (d > proizvod) {
+                break;
+            }
+            jTable1.setValueAt(d, r - (1 + m), y);
+            d++;
+        }
+    }
+
+    private void dlLijevoGore(int r, int s) {
+
+        for (int x = r - (2 + m); x > m; x--) {
+            if (d > proizvod) {
+                break;
+            }
+            jTable1.setValueAt(d, x, m);
+            d++;
+        }
+    }
+
+    private void glLijevoDesno(int r, int s) {
+        for (int y = m; y < s - m; y++) {
+            if (d > proizvod) {
+                break;
+            }
+            jTable1.setValueAt(d, m, y);
+            d++;
+        }
+    }
+
+    private void gdDesnoDolje(int r, int s) {
+        for (int x = (1 + m); x < r - (1 + m); x++) {
+            if (d > proizvod) {
+                break;
+            }
+            jTable1.setValueAt(d, x, s - (1 + m));
+            d++;
+        }
+    }
+
     /**
      * @param args the command line arguments
      */

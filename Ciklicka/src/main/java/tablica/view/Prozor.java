@@ -77,6 +77,9 @@ public class Prozor extends javax.swing.JFrame {
         boolean provjera = Provjera.pozitivnost(r, s);
         if(provjera == true){
             JOptionPane.showMessageDialog(rootPane, "Unos je točan");
+            Tablica tablica = new Tablica();
+            tablica.kreiranjeTablice(r,s);
+            tablica.setVisible(true);
         }else{
             JOptionPane.showMessageDialog(rootPane, "Unos nije točan");
         }
