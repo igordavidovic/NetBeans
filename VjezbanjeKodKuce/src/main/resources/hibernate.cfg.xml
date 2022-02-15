@@ -40,5 +40,12 @@
         <mapping class="vjezbanje.model.vjezba.nasljedivanje.Primka" />
         <mapping class="vjezbanje.model.vjezba.nasljedivanje.Otpremnica" />
         
+        
+        <!-- veze -->
+        <mapping class="vjezbanje.model.vjezba.veze.Opcina" />
+        <mapping class="vjezbanje.model.vjezba.veze.Mjesto" />
+        <mapping class="vjezbanje.model.vjezba.veze.Oznaka" />
+        <mapping class="vjezbanje.model.vjezba.veze.Slika" />
+        
     </session-factory>
 </hibernate-configuration>
