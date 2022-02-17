@@ -31,21 +31,29 @@
         
         
         
-        
+        <!--
         <mapping class="vjezbanje.model.vjezba.osnovno.Mobitel" />
         <mapping class="vjezbanje.model.vjezba.osnovno.Olovka" />
         <mapping class="vjezbanje.model.vjezba.osnovno.Racunalo" />
-        
+        -->
         <!-- Ne treba navoditi nadklase -->
+        <!--
         <mapping class="vjezbanje.model.vjezba.nasljedivanje.Primka" />
         <mapping class="vjezbanje.model.vjezba.nasljedivanje.Otpremnica" />
-        
+        -->
         
         <!-- veze -->
+        <!--
         <mapping class="vjezbanje.model.vjezba.veze.Opcina" />
         <mapping class="vjezbanje.model.vjezba.veze.Mjesto" />
         <mapping class="vjezbanje.model.vjezba.veze.Oznaka" />
         <mapping class="vjezbanje.model.vjezba.veze.Slika" />
+        -->
+        
+        <mapping class="vjezbanje.model.Polaznik" />
+        <mapping class="vjezbanje.model.Predavac" />
+        <mapping class="vjezbanje.model.Smjer" />
+        <mapping class="vjezbanje.model.Grupa" />
         
     </session-factory>
 </hibernate-configuration>

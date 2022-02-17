@@ -24,7 +24,7 @@ public class Start {
     public Start(){
         this.session = HibernateUtil.getSession();
         //primjerRadaSVezama();
-        procitajOpcine();
+        //procitajOpcine();
     }
    
     private void procitajOpcine(){
