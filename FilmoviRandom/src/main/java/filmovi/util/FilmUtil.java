@@ -42,7 +42,7 @@ public class FilmUtil {
                 opis = Xsoup.compile("//*[@id=\"main\"]/div[1]/div[2]/div[2]/ul/li[" + i + "]/p[5]/a[1]").evaluate(d).get();
 
                 zanr = Xsoup.compile("//*[@id=\"main\"]/div[1]/div[2]/div[2]/ul/li[" + i + "]/p[3]/span[2]").evaluate(d).get();
-
+                
                 temp = Xsoup.compile("/html/body/section[2]/div[1]/div[2]/div[2]/ul/li[" + i + "]/p[3]/span[1]").evaluate(d).get();
                 film = filmSet(naziv, opis, zanr, temp);
                 filmovi[i - 1] = film;
@@ -59,8 +59,10 @@ public class FilmUtil {
         double ocjena;
         try {
             film.setNaziv(naziv.substring(6, naziv.length() - 7));
-            film.setOpis(opis.substring(93, opis.length() - 67));
-            film.setZanr(zanr.substring(6, zanr.length() - 7));
+            film.setOpis(opis.substring(93, opis.length() - 66));
+            zanr = zanr.subSequence(6, zanr.length() - 7).toString();
+            zanr = zanr.replace("&nbsp;", "");
+            film.setZanr(zanr);
             ocjena = Double.parseDouble(temp.substring(6, temp.length() - 7));
             film.setOcjena(new BigDecimal(ocjena));
         } catch (Exception e) {
