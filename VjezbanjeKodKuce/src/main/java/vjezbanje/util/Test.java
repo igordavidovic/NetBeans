@@ -11,6 +11,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import vjezbanje.controller.ObradaSmjer;
+import vjezbanje.model.Smjer;
 
 
 /**
@@ -20,7 +24,17 @@ import java.util.Set;
 public class Test {
 
     public static void main(String[] args) {
-
+        Smjer s = new Smjer();
+        s.setNaziv("Java Programiranje");
+        s.setTrajanje(130);
+        ObradaSmjer os = new ObradaSmjer();
+        os.setEntitet(s);
+        
+        try {
+            os.create();
+        } catch (EdunovaException ex) {
+            System.out.println(ex.getPoruka());
+        }
     }
 
     private void fakerTest() {
