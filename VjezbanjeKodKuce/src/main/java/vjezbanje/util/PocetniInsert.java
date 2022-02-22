@@ -24,11 +24,12 @@ public class PocetniInsert {
 
     public static void izvedi() {
         Session session = HibernateUtil.getSession();
+        session.beginTransaction();
         Faker faker = new Faker();
 
-        List<Polaznik> polaznici = new ArrayList();
-        List<Predavac> predavaci = new ArrayList();
-        List<Smjer> smjerovi = new ArrayList();
+        List<Polaznik> polaznici = generirajPolaznike(faker, session);
+        List<Predavac> predavaci = generirajPredavace(faker, session);
+        List<Smjer> smjerovi = generirajSmjerove(faker, session);
         Smjer s;
         Grupa g;
         for(int i = 0;i < smjerovi.size()-2;i++){
@@ -48,6 +49,7 @@ public class PocetniInsert {
                 System.out.println("Kreirao grupu : " + g.getNaziv());
             }
         }
+        session.getTransaction().commit();
     }
     
     private static List<Smjer> generirajSmjerove(Faker faker,Session session){
