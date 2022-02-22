@@ -12,6 +12,7 @@ import vjezbanje.model.vjezba.osnovno.Mobitel;
 import vjezbanje.model.vjezba.veze.Mjesto;
 import vjezbanje.model.vjezba.veze.Opcina;
 import vjezbanje.util.HibernateUtil;
+import vjezbanje.util.PocetniInsert;
 
 /**
  *
@@ -22,7 +23,8 @@ public class Start {
     private Session session;
     
     public Start(){
-        this.session = HibernateUtil.getSession();
+        //this.session = HibernateUtil.getSession();
+        PocetniInsert.izvedi();
         //primjerRadaSVezama();
         //procitajOpcine();
     }
