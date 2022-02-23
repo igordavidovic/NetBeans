@@ -30,6 +30,7 @@
                   <Component id="btnStart" max="32767" attributes="0"/>
                   <Component id="txtRijedakUnos" max="32767" attributes="0"/>
                   <Component id="txtStupacUnos" max="32767" attributes="0"/>
+                  <Component id="txtPocetakUnos" max="32767" attributes="0"/>
               </Group>
               <EmptySpace pref="174" max="32767" attributes="0"/>
           </Group>
@@ -40,9 +41,11 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
               <Component id="txtRijedakUnos" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="txtStupacUnos" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+              <Component id="txtPocetakUnos" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="btnStart" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="121" max="32767" attributes="0"/>
           </Group>
@@ -61,6 +64,8 @@
     <Component class="javax.swing.JTextField" name="txtRijedakUnos">
     </Component>
     <Component class="javax.swing.JTextField" name="txtStupacUnos">
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtPocetakUnos">
     </Component>
   </SubComponents>
 </Form>
