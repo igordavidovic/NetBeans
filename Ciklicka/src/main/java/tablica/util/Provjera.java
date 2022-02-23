@@ -4,50 +4,46 @@
  */
 package tablica.util;
 
+import tablica.DonjiDesniKut;
+import tablica.DonjiLijeviKut;
+import tablica.GornjiDesniKut;
+import tablica.GornjiLijeviKut;
+
 /**
  *
  * @author Igor
  */
 public class Provjera {
-    public static void main(String[] args) {
-        String s = "S";
-        int a;
-        try {
-            a = Integer.parseInt(s);
-            System.out.println(a);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        
-    }
     
-    public static int provjeraRijedka(String rijedak){
-        int r;
+    public static int provjera(String unos){
+        int broj;
         try {
-            r = Integer.parseInt(rijedak);
+            broj = Integer.parseInt(unos);
         } catch (Exception e) {
-            System.out.println("Greška : " + e.getMessage());
             return 0;
         }
-        return r;
+        return broj;
     }
     
-    public static int provjeraStupca(String stupac){
-        int s;
-        try {
-            s = Integer.parseInt(stupac);
-        } catch (Exception e) {
-            System.out.println("Greška : " + e.getMessage());
-            return 0;
-        }
-        return s;
-    }
-    
-    public static boolean pozitivnost(int r,int s){
-        if(r < 1 || s < 1){
+    public static boolean pozitivnost(int r,int s,int p){
+        if(r < 1 || s < 1 || (p < 1 || p > 4)){
             return false;
         }else{
             return true;
         }     
+    }
+    
+    public static Object[][] odabir(int r,int s,int p){
+        Object[][] objekti;
+        if(p == 1){
+           objekti = DonjiDesniKut.smjer(r, s);
+        }else if(p == 2){
+            objekti = DonjiLijeviKut.smjer(r, s);
+        }else if(p == 3){
+            objekti = GornjiLijeviKut.smjer(r, s);
+        }else{
+            objekti = GornjiDesniKut.smjer(r, s);
+        }
+        return objekti;
     }
 }
