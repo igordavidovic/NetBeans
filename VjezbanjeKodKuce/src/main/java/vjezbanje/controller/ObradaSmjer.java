@@ -4,6 +4,7 @@
  */
 package vjezbanje.controller;
 
+import java.math.BigDecimal;
 import java.util.List;
 import vjezbanje.model.Smjer;
 import vjezbanje.util.EdunovaException;
@@ -12,8 +13,8 @@ import vjezbanje.util.EdunovaException;
  *
  * @author Igor
  */
-public class ObradaSmjer extends Obrada<Smjer>{
-    
+public class ObradaSmjer extends Obrada<Smjer> {
+
     @Override
     public List<Smjer> read() {
         return session.createQuery("from Smjer").list();
@@ -23,27 +24,36 @@ public class ObradaSmjer extends Obrada<Smjer>{
     protected void kontrolaCreate() throws EdunovaException {
         kontrolaNaziv();
         kontrolaTrajanje();
+        kontrolaCijena();
     }
 
     @Override
     protected void kontrolaUpdate() throws EdunovaException {
-        
+        kontrolaNaziv();
+        kontrolaTrajanje();
+        kontrolaCijena();
     }
 
     @Override
     protected void kontrolaDelete() throws EdunovaException {
         
     }
-    
-    private void kontrolaNaziv() throws EdunovaException{
-        if(entitet.getNaziv() == null || entitet.getNaziv().trim().isEmpty()){
+
+    private void kontrolaNaziv() throws EdunovaException {
+        if (entitet.getNaziv() == null || entitet.getNaziv().trim().isEmpty()) {
             throw new EdunovaException("Naziv smjera obavezan");
         }
     }
-    
-    private void kontrolaTrajanje() throws EdunovaException{
-        if(entitet.getTrajanje() == null || entitet.getTrajanje()<0){
+
+    private void kontrolaTrajanje() throws EdunovaException {
+        if (entitet.getTrajanje() == null || entitet.getTrajanje() < 0) {
             throw new EdunovaException("Trajanje mora biti postavljeno i ne smije biti manje od 0");
+        }
+    }
+
+    private void kontrolaCijena() throws EdunovaException {
+        if (entitet.getCijena() == null || entitet.getCijena().compareTo(BigDecimal.ZERO) < 0 || entitet.getCijena().compareTo(new BigDecimal(10000)) > 0) {
+            throw new EdunovaException("Cijena mora biti postavljena, veća od 0 i manja od 10000");
         }
     }
 }
