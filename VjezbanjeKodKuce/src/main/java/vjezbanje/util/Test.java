@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,7 +23,7 @@ import vjezbanje.model.Smjer;
  * @author Igor
  */
 public class Test {
-
+    
     public static void main(String[] args) {
         Smjer s = new Smjer();
         s.setNaziv("Java Programiranje");
