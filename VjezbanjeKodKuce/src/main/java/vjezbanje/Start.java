@@ -21,6 +21,7 @@ import vjezbanje.model.vjezba.veze.Opcina;
 import vjezbanje.util.EdunovaException;
 import vjezbanje.util.HibernateUtil;
 import vjezbanje.util.PocetniInsert;
+import vjezbanje.view.SplashScreen;
 
 /**
  *
@@ -36,15 +37,19 @@ public class Start {
         
         //primjerRadaSVezama();
         //procitajOpcine();
-        tesitranjeUnosaPredavaca();
-        /*List<Grupa> grupe = new ObradaGrupa().read();
+        //tesitranjeUnosaPredavaca();
+        
+    }
+    
+    private void vjezbanjeCitanjaPodataka(){
+        List<Grupa> grupe = new ObradaGrupa().read();
         for(Grupa g : grupe){
             System.out.println(g.getNaziv() + " - " + g.getSmjer().getNaziv() + " - " + g.getPredavac().getIme() + " " + g.getPredavac().getPrezime());
             for(Polaznik p : g.getPolaznici()){
                 System.out.println(p.getIme() + " " + p.getPrezime());
             }
             
-        }*/
+        }
     }
    
     private void procitajOpcine(){
@@ -73,8 +78,10 @@ public class Start {
         session.getTransaction().commit();
     }
     public static void main(String[] args) {
-      new Start();
-        /*
+      //new Start();
+        new SplashScreen().setVisible(true);
+    }
+    private void vjezbanjeSpremanjaUBazu(){
         Session s = HibernateUtil.getSession();         
        
        Mobitel m = new Mobitel();
@@ -88,10 +95,8 @@ public class Start {
         s.beginTransaction();
         s.save(m);
         s.getTransaction().commit();
-            */
-        
     }
-
+    
     private void tesitranjeUnosaPredavaca() {
         Predavac predavac = new Predavac();
         predavac.setOib("30861771565");
