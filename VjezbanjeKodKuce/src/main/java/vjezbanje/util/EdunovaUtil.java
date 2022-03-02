@@ -12,13 +12,24 @@ import javax.swing.JOptionPane;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import us.codecraft.xsoup.Xsoup;
+import vjezbanje.model.Operater;
 
 /**
  *
  * @author Igor
  */
 public class EdunovaUtil {
-
+    
+    
+    public static Operater operater;
+    public static final String NAZIV_APP="Edunova app";
+    
+    public static String getNaslov(String naslov){
+        if(EdunovaUtil.operater == null){
+            return EdunovaUtil.NAZIV_APP + " " + naslov;
+        }
+        return EdunovaUtil.NAZIV_APP + " " + naslov + " " + EdunovaUtil.operater.getIme() + " " + EdunovaUtil.operater.getPrezime() + " - " + EdunovaUtil.operater.getUloga();
+    }
     public static String generirajOib() {
         // DZ
         // Umjesto spajanja na web stranicu napraviti generiranje u java programskom jeziku

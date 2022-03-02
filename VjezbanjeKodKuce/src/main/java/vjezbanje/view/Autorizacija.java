@@ -8,6 +8,10 @@ import java.awt.Color;
 import java.awt.event.KeyEvent;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
+import javax.swing.JOptionPane;
+import vjezbanje.controller.ObradaOperater;
+import vjezbanje.model.Operater;
+import vjezbanje.util.EdunovaUtil;
 
 /**
  *
@@ -18,10 +22,15 @@ public class Autorizacija extends javax.swing.JFrame {
     /**
      * Creates new form Autorizacija
      */
+    
+    private ObradaOperater obradaOperater;
+    
     public Autorizacija() {
         initComponents();
+        obradaOperater = new ObradaOperater();
         txtEmail.setText("edunova@edunova.hr");
         txtLozinka.setText("e");
+        setTitle(EdunovaUtil.getNaslov("Autorizacija"));
     }
 
     /**
@@ -181,7 +190,16 @@ public class Autorizacija extends javax.swing.JFrame {
             txtEmail.requestFocus();
             return;
         }
-        System.out.println(txtEmail.getText() + " " + new String(txtLozinka.getPassword()));
+        //System.out.println(txtEmail.getText() + " " + new String(txtLozinka.getPassword()));
+        Operater operater = obradaOperater.autoriziraj(txtEmail.getText(), new String(txtLozinka.getPassword()));
         
+        if(operater == null){
+            JOptionPane.showMessageDialog(getRootPane(), "Neispravna kombinacija email i lozinka");
+            return;
+        }
+        EdunovaUtil.operater = operater;
+        
+        new Izbornik().setVisible(true);
+        dispose();
     }
 }

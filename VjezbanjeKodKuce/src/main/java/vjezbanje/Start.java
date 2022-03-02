@@ -7,8 +7,6 @@ package vjezbanje;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.hibernate.Session;
 import vjezbanje.controller.ObradaGrupa;
 import vjezbanje.controller.ObradaPredavac;
@@ -28,40 +26,39 @@ import vjezbanje.view.SplashScreen;
  * @author Igor
  */
 public class Start {
-    
+
     private Session session;
-    
-    public Start(){
+
+    public Start() {
         //this.session = HibernateUtil.getSession();
         //PocetniInsert.izvedi();
-        
+
         //primjerRadaSVezama();
         //procitajOpcine();
         //tesitranjeUnosaPredavaca();
-        
     }
-    
-    private void vjezbanjeCitanjaPodataka(){
+
+    private void vjezbanjeCitanjaPodataka() {
         List<Grupa> grupe = new ObradaGrupa().read();
-        for(Grupa g : grupe){
+        for (Grupa g : grupe) {
             System.out.println(g.getNaziv() + " - " + g.getSmjer().getNaziv() + " - " + g.getPredavac().getIme() + " " + g.getPredavac().getPrezime());
-            for(Polaznik p : g.getPolaznici()){
+            for (Polaznik p : g.getPolaznici()) {
                 System.out.println(p.getIme() + " " + p.getPrezime());
             }
-            
+
         }
     }
-   
-    private void procitajOpcine(){
+
+    private void procitajOpcine() {
         List<Opcina> opcine = session.createQuery("from Opcina").list();
-        
-        for(Opcina o : opcine){
+
+        for (Opcina o : opcine) {
             System.out.println(o.getNaziv());
-            o.getMjesta().forEach(m->System.out.println(m.getNaziv()));
+            o.getMjesta().forEach(m -> System.out.println(m.getNaziv()));
         }
     }
-    
-    private void primjerRadaSVezama(){
+
+    private void primjerRadaSVezama() {
         session.beginTransaction();
         Opcina opcina = new Opcina();
         opcina.setNaziv("Bilje");
@@ -70,34 +67,36 @@ public class Start {
         mjesto.setNaziv("Kopačevo");
         mjesto.setOpcina(opcina);
         session.save(mjesto);
-        
+
         mjesto = new Mjesto();
         mjesto.setNaziv("Bilje");
         mjesto.setOpcina(opcina);
         session.save(mjesto);
         session.getTransaction().commit();
     }
+
     public static void main(String[] args) {
-      //new Start();
-       // new SplashScreen().setVisible(true);
-       PocetniInsert.unosOperatera();
+        //new Start();
+        new SplashScreen().setVisible(true);
+        //PocetniInsert.unosOperatera();
     }
-    private void vjezbanjeSpremanjaUBazu(){
-        Session s = HibernateUtil.getSession();         
-       
-       Mobitel m = new Mobitel();
+
+    private void vjezbanjeSpremanjaUBazu() {
+        Session s = HibernateUtil.getSession();
+
+        Mobitel m = new Mobitel();
         m.setCijena(new BigDecimal(5999.99));
         m.setNaziv("iPhone");
         m.setDatumKupnje(new Date());
         m.setIspravan(true);
         m.setOpis("Mobitel je dobar");
         m.setNapomena("Sve je ok");
-        
+
         s.beginTransaction();
         s.save(m);
         s.getTransaction().commit();
     }
-    
+
     private void tesitranjeUnosaPredavaca() {
         Predavac predavac = new Predavac();
         predavac.setOib("30861771565");
