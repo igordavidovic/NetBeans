@@ -54,6 +54,7 @@
         <mapping class="vjezbanje.model.Predavac" />
         <mapping class="vjezbanje.model.Smjer" />
         <mapping class="vjezbanje.model.Grupa" />
+        <mapping class="vjezbanje.model.Operater" />
         
     </session-factory>
 </hibernate-configuration>

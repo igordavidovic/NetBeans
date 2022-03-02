@@ -79,7 +79,8 @@ public class Start {
     }
     public static void main(String[] args) {
       //new Start();
-        new SplashScreen().setVisible(true);
+       // new SplashScreen().setVisible(true);
+       PocetniInsert.unosOperatera();
     }
     private void vjezbanjeSpremanjaUBazu(){
         Session s = HibernateUtil.getSession();         
