@@ -24,6 +24,10 @@ public class SplashScreen extends javax.swing.JFrame {
      */
     public SplashScreen() {
         initComponents();
+        postavke();
+    }
+
+    private void postavke() {
         i = 0;
         hibernateGotov = false;
         Ucitanje ucitanje = new Ucitanje();

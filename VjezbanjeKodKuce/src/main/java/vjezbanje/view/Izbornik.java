@@ -21,6 +21,10 @@ public class Izbornik extends javax.swing.JFrame {
      */
     public Izbornik() {
         initComponents();
+        postavke();
+    }
+
+    private void postavke() {
         setTitle(EdunovaUtil.getNaslov("Izbornik"));
         jmAplikacija.setText(EdunovaUtil.NAZIV_APP);
         df = new SimpleDateFormat("dd. MMMM. yyy. HH:mm:ss");
@@ -39,7 +43,7 @@ public class Izbornik extends javax.swing.JFrame {
             }
             run();
         }
-        
+
     }
 
     /**

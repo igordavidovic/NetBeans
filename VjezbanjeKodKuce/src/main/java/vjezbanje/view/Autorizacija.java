@@ -22,11 +22,14 @@ public class Autorizacija extends javax.swing.JFrame {
     /**
      * Creates new form Autorizacija
      */
-    
     private ObradaOperater obradaOperater;
-    
+
     public Autorizacija() {
         initComponents();
+        postavke();
+    }
+
+    private void postavke() {
         obradaOperater = new ObradaOperater();
         txtEmail.setText("edunova@edunova.hr");
         txtLozinka.setText("e");
@@ -192,13 +195,13 @@ public class Autorizacija extends javax.swing.JFrame {
         }
         //System.out.println(txtEmail.getText() + " " + new String(txtLozinka.getPassword()));
         Operater operater = obradaOperater.autoriziraj(txtEmail.getText(), new String(txtLozinka.getPassword()));
-        
-        if(operater == null){
+
+        if (operater == null) {
             JOptionPane.showMessageDialog(getRootPane(), "Neispravna kombinacija email i lozinka");
             return;
         }
         EdunovaUtil.operater = operater;
-        
+
         new Izbornik().setVisible(true);
         dispose();
     }
