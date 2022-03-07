@@ -5,6 +5,7 @@
 package vjezbanje.util;
 
 import com.github.javafaker.Faker;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -25,6 +26,14 @@ import vjezbanje.model.Smjer;
 public class Test {
     
     public static void main(String[] args) {
+        double n = 1240.35;
+
+        NumberFormat nf = NumberFormat.getInstance(new Locale("hr", "HR"));
+        String val = nf.format(n);
+
+        System.out.println(val);
+    }
+    private void testSmjer(){
         Smjer s = new Smjer();
         s.setNaziv("Java Programiranje");
         s.setTrajanje(130);
@@ -37,7 +46,6 @@ public class Test {
             System.out.println(ex.getPoruka());
         }
     }
-
     private void fakerTest() {
         Faker faker = new Faker();
 
