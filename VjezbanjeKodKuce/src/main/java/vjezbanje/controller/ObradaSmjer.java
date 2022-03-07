@@ -6,6 +6,7 @@ package vjezbanje.controller;
 
 import java.math.BigDecimal;
 import java.util.List;
+import vjezbanje.model.Grupa;
 import vjezbanje.model.Smjer;
 import vjezbanje.util.EdunovaException;
 
@@ -17,7 +18,7 @@ public class ObradaSmjer extends Obrada<Smjer> {
 
     @Override
     public List<Smjer> read() {
-        return session.createQuery("from Smjer").list();
+        return session.createQuery("from Smjer a order by a.naziv").list();
     }
 
     @Override
@@ -36,7 +37,16 @@ public class ObradaSmjer extends Obrada<Smjer> {
 
     @Override
     protected void kontrolaDelete() throws EdunovaException {
-        
+        if (entitet.getGrupe() != null && entitet.getGrupe().size() > 0) {
+            StringBuilder sb = new StringBuilder();
+            sb.append("\n");
+            for (Grupa g : entitet.getGrupe()) {
+                sb.append(g.getNaziv());
+                sb.append("\n");
+            }
+
+            throw new EdunovaException("Ne možete brisati smjer jer na njemu ima grupa" + sb.toString());
+        }
     }
 
     private void kontrolaNaziv() throws EdunovaException {

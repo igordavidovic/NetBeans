@@ -4,27 +4,39 @@
  */
 package vjezbanje.view;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import vjezbanje.controller.ObradaSmjer;
 import vjezbanje.model.Smjer;
+import vjezbanje.util.EdunovaException;
+import vjezbanje.util.EdunovaUtil;
 
 /**
  *
  * @author Igor
  */
 public class SmjerProzor extends javax.swing.JFrame {
+
     private ObradaSmjer obrada;
-    private NumberFormat nf;
+    private DecimalFormat nf;
+
     /**
      * Creates new form SmjerProzor
      */
     public SmjerProzor() {
         initComponents();
         obrada = new ObradaSmjer();
-        nf = NumberFormat.getInstance(new Locale("hr","HR"));
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols(new Locale("hr", "HR"));
+        nf = new DecimalFormat("###,###.00", symbols);
+        setTitle(EdunovaUtil.getNaslov("Smjerovi"));
         ucitaj();
     }
 
@@ -46,6 +58,9 @@ public class SmjerProzor extends javax.swing.JFrame {
         txtCijena = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         chbCertificiran = new javax.swing.JCheckBox();
+        btnKreiraj = new javax.swing.JButton();
+        btnPromijeni = new javax.swing.JButton();
+        btnObrisi = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,35 +73,70 @@ public class SmjerProzor extends javax.swing.JFrame {
 
         jLabel1.setText("Naziv");
 
+        txtTrajanje.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+
         jLabel2.setText("Trajanje");
+
+        txtCijena.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         jLabel3.setText("Cijena");
 
         chbCertificiran.setText("Certificiran");
+
+        btnKreiraj.setText("Kreiraj");
+        btnKreiraj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKreirajActionPerformed(evt);
+            }
+        });
+
+        btnPromijeni.setText("Promijeni");
+        btnPromijeni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPromijeniActionPerformed(evt);
+            }
+        });
+
+        btnObrisi.setText("Obriši");
+        btnObrisi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnObrisiActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(13, 13, 13)
+                                .addComponent(chbCertificiran))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtNaziv)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtTrajanje)
-                                    .addComponent(txtCijena, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(12, 12, 12))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(chbCertificiran)
-                        .addContainerGap(124, Short.MAX_VALUE))))
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtCijena, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtTrajanje, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btnKreiraj)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnPromijeni, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnObrisi)))
+                                .addGap(0, 12, Short.MAX_VALUE))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,7 +155,12 @@ public class SmjerProzor extends javax.swing.JFrame {
                 .addComponent(txtCijena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(chbCertificiran)
-                .addContainerGap(97, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnObrisi)
+                    .addComponent(btnKreiraj)
+                    .addComponent(btnPromijeni))
+                .addGap(51, 51, 51))
             .addComponent(jScrollPane1)
         );
 
@@ -113,23 +168,71 @@ public class SmjerProzor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lstEntitetiValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstEntitetiValueChanged
-       if(evt.getValueIsAdjusting() || lstEntiteti.getSelectedValue() == null){
-           return;
-       } 
-       obrada.setEntitet(lstEntiteti.getSelectedValue());
-       var s = obrada.getEntitet();
-       txtNaziv.setText(s.getNaziv());
-       txtTrajanje.setText(s.getTrajanje().toString());
-       txtCijena.setText(s.getCijena() != null ? nf.format(s.getCijena()) : "") ;
-       chbCertificiran.setSelected(s.getCertificiran() != null ? s.getCertificiran() : false);
+        if (evt.getValueIsAdjusting() || lstEntiteti.getSelectedValue() == null) {
+            return;
+        }
+        obrada.setEntitet(lstEntiteti.getSelectedValue());
+        var s = obrada.getEntitet();
+        txtNaziv.setText(s.getNaziv());
+        txtTrajanje.setText(s.getTrajanje().toString());
+        txtCijena.setText(s.getCijena() != null ? nf.format(s.getCijena()) : "");
+        chbCertificiran.setSelected(s.getCertificiran() != null ? s.getCertificiran() : false);
     }//GEN-LAST:event_lstEntitetiValueChanged
+
+    private void btnKreirajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKreirajActionPerformed
+        try {
+            obrada.setEntitet(new Smjer());
+            preuzmiVrijednost();
+            obrada.create();
+            ucitaj();
+        } catch (EdunovaException ex) {
+            JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());
+        }
+    }//GEN-LAST:event_btnKreirajActionPerformed
+
+    private void btnPromijeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromijeniActionPerformed
+        if (obrada.getEntitet() == null) {
+            JOptionPane.showMessageDialog(getRootPane(), "Prvo odaberite stavku");
+            return;
+        }
+        preuzmiVrijednost();
+
+        try {
+            obrada.update();
+            ucitaj();
+        } catch (EdunovaException ex) {
+            JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());
+        }
+    }//GEN-LAST:event_btnPromijeniActionPerformed
+
+    private void btnObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiActionPerformed
+        if (obrada.getEntitet() == null) {
+            JOptionPane.showMessageDialog(getRootPane(), "Prvo odaberite stavku");
+            return;
+        }
+
+        if (JOptionPane.showConfirmDialog(getRootPane(), "Sigruno obrisati \"" + obrada.getEntitet() + "\"?"
+                , "Brisanje", JOptionPane.YES_NO_OPTION, 
+                JOptionPane.QUESTION_MESSAGE) == JOptionPane.NO_OPTION) {
+            return;
+        }
+        try {
+            obrada.delete();
+            ucitaj();
+        } catch (EdunovaException ex) {
+            JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());
+        }
+        
+    }//GEN-LAST:event_btnObrisiActionPerformed
 
     /**
      * @param args the command line arguments
      */
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnKreiraj;
+    private javax.swing.JButton btnObrisi;
+    private javax.swing.JButton btnPromijeni;
     private javax.swing.JCheckBox chbCertificiran;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -144,9 +247,33 @@ public class SmjerProzor extends javax.swing.JFrame {
     private void ucitaj() {
         DefaultListModel<Smjer> m = new DefaultListModel<>();
         List<Smjer> entiteti = obrada.read();
-        for(Smjer s : entiteti){
+         /*
+        Collections.sort(entiteti,new Comparator<Smjer>() {
+            @Override
+            public int compare(Smjer o1, Smjer o2) {
+                return o1.getNaziv().compareTo(o2.getNaziv());
+            }
+        });
+         */
+        for (Smjer s : entiteti) {
             m.addElement(s);
         }
         lstEntiteti.setModel(m);
+    }
+
+    private void preuzmiVrijednost() {
+        var s = obrada.getEntitet();
+        s.setNaziv(txtNaziv.getText());
+        try {
+            s.setTrajanje(Integer.parseInt(txtTrajanje.getText()));
+        } catch (Exception e) {
+            s.setTrajanje(0);
+        }
+        try {
+            s.setCijena(new BigDecimal(nf.parse(txtCijena.getText()).toString()));
+        } catch (Exception e) {
+            s.setCijena(BigDecimal.ZERO);
+        }
+        s.setCertificiran(chbCertificiran.isSelected());
     }
 }

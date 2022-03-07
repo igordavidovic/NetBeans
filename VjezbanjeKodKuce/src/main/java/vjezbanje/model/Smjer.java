@@ -5,7 +5,9 @@
 package vjezbanje.model;
 
 import java.math.BigDecimal;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -17,9 +19,19 @@ public class Smjer extends Entitet{
     private Integer trajanje;
     private BigDecimal cijena;
     private Boolean certificiran;
-
+    @OneToMany(mappedBy = "smjer")
+    private List<Grupa> grupe;
+    
     public String getNaziv() {
         return naziv;
+    }
+
+    public List<Grupa> getGrupe() {
+        return grupe;
+    }
+
+    public void setGrupe(List<Grupa> grupe) {
+        this.grupe = grupe;
     }
 
     public void setNaziv(String naziv) {
