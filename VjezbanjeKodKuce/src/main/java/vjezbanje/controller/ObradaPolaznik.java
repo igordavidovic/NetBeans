@@ -25,11 +25,16 @@ public class ObradaPolaznik extends ObradaOsoba<Polaznik> {
         kontrolaBrojUgovora();
     }
 
-    private void kontrolaBrojUgovora() throws EdunovaException{
-        if(entitet.getBrojUgovora() == null || !entitet.getBrojUgovora().contains("/")){
+    private void kontrolaBrojUgovora() throws EdunovaException {
+        if (entitet.getBrojUgovora() == null || !entitet.getBrojUgovora().contains("/")) {
             throw new EdunovaException("Broj ugovora mora imati /");
         }
     }
-    
-    
+
+    @Override
+    protected void kontrolaDelete() throws EdunovaException {
+        if (entitet.getGrupe() != null && entitet.getGrupe().size() > 0) {
+            throw new EdunovaException("Polaznik ne možete obrisati jer pohađa jednu ili više grupa");
+        }
+    }
 }

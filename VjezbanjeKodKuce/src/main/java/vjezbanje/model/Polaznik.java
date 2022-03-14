@@ -4,7 +4,9 @@
  */
 package vjezbanje.model;
 
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 
 /**
  *
@@ -13,7 +15,16 @@ import javax.persistence.Entity;
 @Entity
 public class Polaznik extends Osoba{
     private String brojUgovora;
+    @ManyToMany(mappedBy = "polaznici")
+    private List<Grupa> grupe;
 
+    public List<Grupa> getGrupe() {
+        return grupe;
+    }
+
+    public void setGrupe(List<Grupa> grupe) {
+        this.grupe = grupe;
+    }
     public String getBrojUgovora() {
         return brojUgovora;
     }

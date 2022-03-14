@@ -4,7 +4,9 @@
  */
 package vjezbanje.model;
 
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -13,13 +15,22 @@ import javax.persistence.Entity;
 @Entity
 public class Predavac extends Osoba{
     private String iban;
-
+    @OneToMany(mappedBy = "predavac")
+    private List<Grupa> grupe;
     public String getIban() {
         return iban;
     }
 
     public void setIban(String iban) {
         this.iban = iban;
+    }
+
+    public List<Grupa> getGrupe() {
+        return grupe;
+    }
+
+    public void setGrupe(List<Grupa> grupe) {
+        this.grupe = grupe;
     }
     
 }
