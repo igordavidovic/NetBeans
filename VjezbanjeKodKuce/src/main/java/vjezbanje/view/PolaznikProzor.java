@@ -11,6 +11,7 @@ import java.awt.event.KeyEvent;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
@@ -48,6 +49,7 @@ public class PolaznikProzor extends javax.swing.JFrame {
         }else{
             entiteti = obrada.read(txtUvjet.getText().trim());
         }
+        Collections.sort(entiteti,new PolaznikComparator());
         
         for (Polaznik s : entiteti) {
             m.addElement(s);
