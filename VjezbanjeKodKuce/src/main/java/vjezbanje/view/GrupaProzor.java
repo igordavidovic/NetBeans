@@ -18,8 +18,10 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import vjezbanje.controller.ObradaGrupa;
+import vjezbanje.controller.ObradaPredavac;
 import vjezbanje.controller.ObradaSmjer;
 import vjezbanje.model.Grupa;
+import vjezbanje.model.Predavac;
 import vjezbanje.model.Smjer;
 
 /**
@@ -39,6 +41,9 @@ public class GrupaProzor extends javax.swing.JFrame {
         setTitle(EdunovaUtil.getNaslov("Grupe"));
         ucitaj();
         
+
+    }
+    private void ucitajSmjer(){
         DefaultComboBoxModel<Smjer> ms = new DefaultComboBoxModel<>();
         Smjer smjer = new Smjer();
         smjer.setSifra(Long.valueOf(0));
@@ -47,7 +52,17 @@ public class GrupaProzor extends javax.swing.JFrame {
         new ObradaSmjer().read().forEach(s->{ms.addElement(s);});
         cmbSmjerovi.setModel(ms);
     }
-
+    
+     private void ucitajPredavac(){
+        DefaultComboBoxModel<Predavac> ms = new DefaultComboBoxModel<>();
+        Predavac predavac = new Predavac();
+        predavac.setSifra(Long.valueOf(0));
+        predavac.setIme("Nije");
+        predavac.setPrezime("odabrano");
+        ms.addElement(predavac);
+        new ObradaPredavac().read().forEach(s->{ms.addElement(s);});
+        cmbPredavaci.setModel(ms);
+    }
     private void ucitaj() {
         DefaultListModel<Grupa> m = new DefaultListModel<>();
         List<Grupa> entiteti = obrada.read();
@@ -77,6 +92,8 @@ public class GrupaProzor extends javax.swing.JFrame {
         btnObrisi = new javax.swing.JButton();
         cmbSmjerovi = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
+        cmbPredavaci = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -112,6 +129,8 @@ public class GrupaProzor extends javax.swing.JFrame {
 
         jLabel2.setText("Smjer");
 
+        jLabel3.setText("Predavač");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -130,9 +149,12 @@ public class GrupaProzor extends javax.swing.JFrame {
                         .addComponent(btnObrisi))
                     .addComponent(jLabel1)
                     .addComponent(txtNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbSmjerovi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbPredavaci, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cmbSmjerovi, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(246, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,7 +169,11 @@ public class GrupaProzor extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addGap(4, 4, 4)
                         .addComponent(cmbSmjerovi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(175, 175, 175)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3)
+                        .addGap(10, 10, 10)
+                        .addComponent(cmbPredavaci, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(121, 121, 121)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnKreiraj)
                             .addComponent(btnPromjeni)
@@ -238,9 +264,11 @@ public class GrupaProzor extends javax.swing.JFrame {
     private javax.swing.JButton btnKreiraj;
     private javax.swing.JButton btnObrisi;
     private javax.swing.JButton btnPromjeni;
+    private javax.swing.JComboBox<Predavac> cmbPredavaci;
     private javax.swing.JComboBox<Smjer> cmbSmjerovi;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList<Grupa> lstEntiteti;
     private javax.swing.JTextField txtNaziv;

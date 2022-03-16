@@ -64,5 +64,4 @@ public class Grupa extends Entitet{
     public void setPolaznici(List<Polaznik> polaznici) {
         this.polaznici = polaznici;
     }
-    
 }
