@@ -27,6 +27,10 @@ public class Izbornik extends javax.swing.JFrame {
     private void postavke() {
         setTitle(EdunovaUtil.getNaslov("Izbornik"));
         jmAplikacija.setText(EdunovaUtil.NAZIV_APP);
+        
+        if(EdunovaUtil.operater.getUloga().equals("oper")){
+            jmiOperateri.setVisible(false);
+        }
         df = new SimpleDateFormat("dd. MMMM. yyy. HH:mm:ss");
         Vrijeme v = new Vrijeme();
         v.start();
@@ -65,6 +69,7 @@ public class Izbornik extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
+        jmiOperateri = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -108,6 +113,9 @@ public class Izbornik extends javax.swing.JFrame {
             }
         });
         jMenu2.add(jMenuItem5);
+
+        jmiOperateri.setText("Operateri");
+        jMenu2.add(jmiOperateri);
 
         jMenuBar1.add(jMenu2);
 
@@ -155,6 +163,7 @@ public class Izbornik extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JMenu jmAplikacija;
+    private javax.swing.JMenuItem jmiOperateri;
     private javax.swing.JLabel lblVrijeme;
     // End of variables declaration//GEN-END:variables
 }
