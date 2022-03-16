@@ -7,11 +7,14 @@ package vjezbanje.view;
 
 
 
+import com.github.lgooddatepicker.components.DatePicker;
+import com.github.lgooddatepicker.components.DatePickerSettings;
 import vjezbanje.util.EdunovaException;
 import vjezbanje.util.EdunovaUtil;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Locale;
 import javax.swing.DefaultComboBoxModel;
@@ -40,8 +43,14 @@ public class GrupaProzor extends javax.swing.JFrame {
         obrada = new ObradaGrupa();
         setTitle(EdunovaUtil.getNaslov("Grupe"));
         ucitaj();
-        
+        ucitajSmjer();
+        ucitajPredavac();
 
+        DatePickerSettings dps = new DatePickerSettings(new Locale("hr","HR"));
+        dps.setFormatForDatesCommonEra("dd.MM.yyyy");
+        dps.setTranslationClear("Očisti");
+        dps.setTranslationToday("Danas");
+        dpDatumPocetka.setSettings(dps);
     }
     private void ucitajSmjer(){
         DefaultComboBoxModel<Smjer> ms = new DefaultComboBoxModel<>();
@@ -94,7 +103,7 @@ public class GrupaProzor extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         cmbPredavaci = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        datePicker1 = new com.github.lgooddatepicker.components.DatePicker();
+        dpDatumPocetka = new com.github.lgooddatepicker.components.DatePicker();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -158,7 +167,7 @@ public class GrupaProzor extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(cmbSmjerovi, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(datePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dpDatumPocetka, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addContainerGap(246, Short.MAX_VALUE))
         );
@@ -182,7 +191,7 @@ public class GrupaProzor extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4)
                         .addGap(12, 12, 12)
-                        .addComponent(datePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(dpDatumPocetka, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(66, 66, 66)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnKreiraj)
@@ -205,8 +214,21 @@ public class GrupaProzor extends javax.swing.JFrame {
         obrada.setEntitet(lstEntiteti.getSelectedValue());
         var e = obrada.getEntitet();
         txtNaziv.setText(e.getNaziv());
-
-       
+        if(e.getSmjer() == null){
+            cmbSmjerovi.setSelectedIndex(0);
+        }else{
+            cmbSmjerovi.setSelectedItem(e.getSmjer());
+        }
+        if(e.getPredavac() == null){
+            cmbPredavaci.setSelectedIndex(0);
+        }else{
+            cmbPredavaci.setSelectedItem(e.getSmjer());
+        }
+       if(e.getDatumPocetka() != null){
+           dpDatumPocetka.setDate(e.getDatumPocetka().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+       }else{
+           dpDatumPocetka.setDate(null);
+       }
     }//GEN-LAST:event_lstEntitetiValueChanged
 
     private void btnKreirajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKreirajActionPerformed
@@ -276,7 +298,7 @@ public class GrupaProzor extends javax.swing.JFrame {
     private javax.swing.JButton btnPromjeni;
     private javax.swing.JComboBox<Predavac> cmbPredavaci;
     private javax.swing.JComboBox<Smjer> cmbSmjerovi;
-    private com.github.lgooddatepicker.components.DatePicker datePicker1;
+    private com.github.lgooddatepicker.components.DatePicker dpDatumPocetka;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
