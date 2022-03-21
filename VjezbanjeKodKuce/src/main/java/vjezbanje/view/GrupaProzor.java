@@ -15,6 +15,7 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import javax.swing.DefaultComboBoxModel;
@@ -288,7 +289,8 @@ public class GrupaProzor extends javax.swing.JFrame {
         var e = obrada.getEntitet();
         e.setNaziv(txtNaziv.getText());
         e.setSmjer((Smjer)cmbSmjerovi.getSelectedItem());
-       
+        e.setPredavac((Predavac)cmbPredavaci.getSelectedItem());
+        e.setDatumPocetka(Date.from(dpDatumPocetka.getDate().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
     }
 
 
