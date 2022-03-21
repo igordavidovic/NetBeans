@@ -28,12 +28,14 @@ public class ObradaGrupa extends Obrada<Grupa> {
 
     @Override
     protected void kontrolaUpdate() throws EdunovaException {
-
+        kontrolaCreate();
     }
 
     @Override
     protected void kontrolaDelete() throws EdunovaException {
-
+        if(entitet.getPolaznici()!= null && !entitet.getPolaznici().isEmpty()){
+            throw new EdunovaException("Ne možete obrisati grupu koja ima polaznike");
+        }
     }
 
     private void kontrolaDatumPocetka() throws EdunovaException {
