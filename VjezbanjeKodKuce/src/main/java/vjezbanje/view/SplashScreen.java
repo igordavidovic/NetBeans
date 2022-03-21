@@ -8,7 +8,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.hibernate.Session;
+import vjezbanje.controller.ObradaOperater;
 import vjezbanje.util.HibernateUtil;
+import vjezbanje.util.PocetniInsert;
 
 /**
  *
@@ -61,6 +63,9 @@ public class SplashScreen extends javax.swing.JFrame {
         public void run() {
             Session s = HibernateUtil.getSession();
             if (s.getMetamodel().getEntities().size() > 0) {
+                if(new ObradaOperater().read().isEmpty()){
+                    PocetniInsert.incijalniPodaci();
+                }
                 hibernateGotov = true;
                 for (int t = i; t < 100; t++) {
                     try {

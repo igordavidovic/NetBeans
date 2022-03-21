@@ -23,7 +23,10 @@ import vjezbanje.model.Smjer;
  * @author Igor
  */
 public class PocetniInsert {
-
+    public static void incijalniPodaci(){
+        unosOperatera();
+        izvedi();
+    }
     public static void unosOperatera() {
         Session session = HibernateUtil.getSession();
         session.beginTransaction();
