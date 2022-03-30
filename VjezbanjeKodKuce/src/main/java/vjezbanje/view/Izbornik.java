@@ -4,8 +4,17 @@
  */
 package vjezbanje.view;
 
+import java.awt.BorderLayout;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.general.DefaultPieDataset;
+import vjezbanje.controller.ObradaGrupa;
+import vjezbanje.model.Grupa;
 import vjezbanje.util.EdunovaUtil;
 
 /**
@@ -22,6 +31,7 @@ public class Izbornik extends javax.swing.JFrame {
     public Izbornik() {
         initComponents();
         postavke();
+        definirajGraf();
     }
 
     private void postavke() {
@@ -34,6 +44,21 @@ public class Izbornik extends javax.swing.JFrame {
         df = new SimpleDateFormat("dd. MMMM. yyy. HH:mm:ss");
         Vrijeme v = new Vrijeme();
         v.start();
+    }
+
+    private void definirajGraf() {
+        DefaultPieDataset dataset = new DefaultPieDataset();
+        List<Grupa> grupe = new ObradaGrupa().read();
+        Collections.sort(grupe, new GrupaComparator());
+        for(Grupa g : new ObradaGrupa().read()){
+            var broj = g.getPolaznici() == null ? 0 : g.getPolaznici().size();
+            dataset.setValue(g.getNaziv() + "(" + broj + ")",broj);
+        }
+        JFreeChart jFreeChart = ChartFactory.createPieChart("Broj polaznika po grupama", dataset);
+        ChartPanel chartPanel = new ChartPanel(jFreeChart);
+        pnlGrafikon.setLayout(new BorderLayout());
+        pnlGrafikon.add(chartPanel,BorderLayout.CENTER);
+        pnlGrafikon.validate();
     }
 
     private class Vrijeme extends Thread {
@@ -61,6 +86,7 @@ public class Izbornik extends javax.swing.JFrame {
 
         jToolBar1 = new javax.swing.JToolBar();
         lblVrijeme = new javax.swing.JLabel();
+        pnlGrafikon = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jmAplikacija = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -77,6 +103,17 @@ public class Izbornik extends javax.swing.JFrame {
 
         lblVrijeme.setText("jLabel1");
         jToolBar1.add(lblVrijeme);
+
+        javax.swing.GroupLayout pnlGrafikonLayout = new javax.swing.GroupLayout(pnlGrafikon);
+        pnlGrafikon.setLayout(pnlGrafikonLayout);
+        pnlGrafikonLayout.setHorizontalGroup(
+            pnlGrafikonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        pnlGrafikonLayout.setVerticalGroup(
+            pnlGrafikonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 243, Short.MAX_VALUE)
+        );
 
         jmAplikacija.setText("File");
 
@@ -126,11 +163,17 @@ public class Izbornik extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pnlGrafikon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 255, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(pnlGrafikon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -165,5 +208,6 @@ public class Izbornik extends javax.swing.JFrame {
     private javax.swing.JMenu jmAplikacija;
     private javax.swing.JMenuItem jmiOperateri;
     private javax.swing.JLabel lblVrijeme;
+    private javax.swing.JPanel pnlGrafikon;
     // End of variables declaration//GEN-END:variables
 }

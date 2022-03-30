@@ -31,7 +31,7 @@ public class Start {
 
     public Start() {
         //this.session = HibernateUtil.getSession();
-        //PocetniInsert.izvedi();
+        PocetniInsert.izvedi();
 
         //primjerRadaSVezama();
         //procitajOpcine();

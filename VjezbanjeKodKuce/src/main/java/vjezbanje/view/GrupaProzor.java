@@ -156,6 +156,7 @@ public class GrupaProzor extends javax.swing.JFrame {
         btnDodajPolaznike = new javax.swing.JButton();
         btnObrisiPolaznike = new javax.swing.JButton();
         btnExportJson = new javax.swing.JButton();
+        btnSlanjeEmail = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -249,6 +250,13 @@ public class GrupaProzor extends javax.swing.JFrame {
             }
         });
 
+        btnSlanjeEmail.setText("Slanje Email");
+        btnSlanjeEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSlanjeEmailActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -280,12 +288,16 @@ public class GrupaProzor extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnExportJson)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnSlanjeEmail))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnDodajPolaznike, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnObrisiPolaznike, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(btnExportJson))
+                            .addComponent(btnObrisiPolaznike, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -337,7 +349,9 @@ public class GrupaProzor extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnObrisiPolaznike)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnExportJson)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnExportJson)
+                            .addComponent(btnSlanjeEmail))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(285, 285, 285)
@@ -491,6 +505,9 @@ public class GrupaProzor extends javax.swing.JFrame {
             m = new DefaultListModel<>();
             lstPolazniciUGrupi.setModel(m);
         }
+        if(obrada.getEntitet().getPolaznici() == null){
+            obrada.getEntitet().setPolaznici(new ArrayList<>());
+        }
         for (Polaznik p : lstPolazniciUSkoli.getSelectedValuesList()) {
             if (!postojiPolaznikUGrupi(m, p)) {
                 obrada.getEntitet().getPolaznici().add(p);
@@ -562,6 +579,11 @@ public class GrupaProzor extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnExportJsonActionPerformed
 
+    private void btnSlanjeEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSlanjeEmailActionPerformed
+        new GrupaSlanjeNaEmailProzor(obrada.getEntitet().getPolaznici()).setVisible(true);
+        
+    }//GEN-LAST:event_btnSlanjeEmailActionPerformed
+
     private boolean postojiPolaznikUGrupi(DefaultListModel<Polaznik> m, Polaznik p) {
         for (int i = 0; i < m.size(); i++) {
             if (m.get(i).getSifra().equals(p.getSifra())) {
@@ -591,6 +613,7 @@ public class GrupaProzor extends javax.swing.JFrame {
     private javax.swing.JButton btnObrisi;
     private javax.swing.JButton btnObrisiPolaznike;
     private javax.swing.JButton btnPromjeni;
+    private javax.swing.JButton btnSlanjeEmail;
     private javax.swing.JButton btnTrazi;
     private javax.swing.JCheckBox chbPocetakPrezimena;
     private javax.swing.JComboBox<Predavac> cmbPredavaci;
